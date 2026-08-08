@@ -10,8 +10,8 @@ const priceRanges = ["Any Price", "Under $2M", "$2M – $5M", "$5M – $10M", "$
 // Default background image of Downtown Dubai
 const DEFAULT_BG_IMAGE = "https://images.unsplash.com/photo-1512436979644-789af475e4ba?ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fDEzfQ&auto=format&fit=crop&w=1950&q=80";
 
-// Floating particle colors (subtle amber/gold for luxury accent)
-const PARTICLE_COLORS = ["#ffffff", "#fbbf24", "#f59e0b", "#ffffff", "#ffffff"];
+// Floating particle colors — luxury gold & pearl palette
+const PARTICLE_COLORS = ["#ffffff", "#fbbf24", "#f59e0b", "#ffffff", "#fbbf24", "#ffffff", "#f59e0b"];
 
 function SearchDropdown({ label, options, value, onChange }) {
   const [open, setOpen] = useState(false);
@@ -70,8 +70,8 @@ export default function HeroSection({ heroImage }) {
     };
   }, []);
 
-  // Parallax transform: shift the gradient background subtly based on cursor
-  const parallaxTransform = `translate(${(mousePos.x - 0.5) * -12}px, ${(mousePos.y - 0.5) * -12}px)`;
+  // Parallax transform: shift the gradient subtly based on cursor
+  const parallaxTransform = `translate(${(mousePos.x - 0.5) * -16}px, ${(mousePos.y - 0.5) * -16}px)`;
 
   const handleSearch = () => {
     const params = new URLSearchParams();
@@ -91,55 +91,62 @@ export default function HeroSection({ heroImage }) {
       ref={parallaxRef}
       className="relative h-screen w-full overflow-hidden"
     >
-      {/* Animated gradient background layer */}
+      {/* Animated luxury gradient background — deep navy → gold shimmer, flowing */}
       <div
         className="absolute inset-0 w-full h-full"
         style={{
-          // Deep luxury palette: indigo → teal → midnight → navy, flowing
-          background: `radial-gradient(1200px 600px at ${20 + mousePos.x * 20}% ${30 + mousePos.y * 10}%, #1e3a8a, transparent 60%), radial-gradient(1200px 600px at ${80 + mousePos.x * -5}% ${70 + mousePos.y * 10}%, #0f172a 0%, transparent 60%), #0a0a0a`,
+          background: `
+            radial-gradient(1400px 800px at ${30 + mousePos.x * 20}% ${25 + mousePos.y * 15}%, #1e3a8a 0%, #1e40af 25%, transparent 65%),
+            radial-gradient(1400px 800px at ${75 + mousePos.x * -10}% ${75 + mousePos.y * 15}%, #0f172a 0%, #1e3a8a 30%, transparent 65%),
+            radial-gradient(circle at ${50 + mousePos.x * 10}% ${40 + mousePos.y * 10}%, #fbbf2420 0%, transparent 40%),
+            #0a0a0a
+          `,
+          backgroundSize: "400% 400%",
+          animation: "gradient-sweep 22s ease-in-out infinite",
           transform: parallaxTransform,
-          transition: "transform 0.1s ease-out",
+          transition: "transform 0.08s ease-out",
         }}
       />
 
-      {/* Subtle animated gradient sweep overlay */}
+      {/* Subtle animated gradient sweep overlay for flowing color motion */}
       <div
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-25"
         style={{
-          background: "linear-gradient(110deg, rgba(30,58,138,0.15) 0%, rgba(15,23,42,0.1) 50%, rgba(13,17,23,0.15) 100%)",
+          background: "linear-gradient(110deg, #1e3a8a00 0%, #0f172a00 50%, #1e40af00 100%)",
           backgroundSize: "400% 400%",
           animationName: "gradient-sweep",
-          animationDuration: "20s",
-          animationTimingFunction: "ease",
+          animationDuration: "22s",
+          animationTimingFunction: "ease-in-out",
           animationIterationCount: "infinite",
         }}
       />
 
-      {/* Floating particles for depth — rendered via pseudo-elements + CSS animation */}
+      {/* Floating luxury particles — gold & pearl, drift upward */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {PARTICLE_COLORS.map((color, i) => (
           <div
             key={i}
-            className="absolute rounded-full opacity-40"
+            className="absolute rounded-full"
             style={{
               width: `${2 + (i % 3)}px`,
               height: `${2 + (i % 3)}px`,
               backgroundColor: color,
-              left: `${10 + (i * 13) % 80}%`,
-              top: `${15 + (i * 17) % 80}%`,
-              boxShadow: `0 0 ${8 + (i * 3)}px ${color}`,
+              left: `${8 + (i * 11) % 84}%`,
+              top: `${12 + (i * 19) % 78}%`,
+              boxShadow: `0 0 ${6 + (i * 2)}px ${color === "#fbbf24" || color === "#f59e0b" ? color : "rgba(255,255,255,0.4)"}`,
+              opacity: 0.35 + (i % 4) * 0.1,
               animationName: `float-${i % 3}`,
-              animationDuration: `${15 + (i * 4)}s`,
+              animationDuration: `${18 + (i * 5)}s`,
               animationTimingFunction: "linear",
               animationIterationCount: "infinite",
-              animationDelay: `-${(i * 3) % 12}s`,
+              animationDelay: `-${(i * 4) % 18}s`,
             }}
           />
         ))}
       </div>
 
-      {/* Dark overlay gradient for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+      {/* Dark overlay gradient for text readability — richer gold-tinted bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
 
       <div className="relative z-10 h-full flex flex-col justify-center md:justify-start md:pt-[35vh] px-[4%] md:px-12 max-w-[1400px] mx-auto">
         <motion.div
