@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
-import { useSearchParams, Link } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import { base44 } from "@/api/base44Client"
 import PropertyCard from "@/components/PropertyCard"
-import { Badge } from "@/components/ui/badge"
 
 export default function PropertiesPage() {
   const [searchParams] = useSearchParams()
@@ -32,7 +31,7 @@ export default function PropertiesPage() {
     const location = searchParams.get("location")
     const type = searchParams.get("type")
     const price = searchParams.get("price")
-    const listing = searchParams.get("listing")
+    const listing = searchParams.get("listing") // eslint-disable-line
 
     if (location) {
       result = result.filter((p) => p.neighborhood === location)

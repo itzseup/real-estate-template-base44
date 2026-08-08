@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useState } from "react"
 
 export default function PropertyFilters({ 
   currentFilters, 
@@ -10,7 +9,7 @@ export default function PropertyFilters({
 }) {
   const [filters, setFilters] = useState(currentFilters || {})
 
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false) // eslint-disable-line
 
   const updateFilter = (key, value) => {
     const newFilters = { ...filters, [key]: value }

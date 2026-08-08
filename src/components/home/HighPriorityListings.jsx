@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import PropertyCard from "../PropertyCard";
 import { Link } from "react-router-dom";
 import { getBadgeForProperty } from "@/lib/badgeUtils";

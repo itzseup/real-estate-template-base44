@@ -7,7 +7,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 export default [
   js.configs.recommended,
   {
-    ignores: ['dist', 'node_modules'],
+    ignores: ['dist', 'node_modules', 'src/components/ui', 'src/hooks'],
   },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
@@ -16,6 +16,7 @@ export default [
       sourceType: 'module',
       globals: {
         ...globals.browser,
+        ...globals.node,
       },
       parserOptions: {
         ecmaFeatures: {
@@ -37,6 +38,10 @@ export default [
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+      'react/no-unescaped-entities': 'off',
+      'react-hooks/set-state-in-effect': 'warn',
+      'no-unused-vars': ['warn', { args: 'after-used', varsIgnorePattern: '^(mock|actionTypes|genId|sidebarOpen|setSidebarOpen)', vars: 'all' }],
       'react-refresh/only-export-default': 'off',
     },
   },

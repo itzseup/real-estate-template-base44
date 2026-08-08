@@ -29,14 +29,9 @@ export default function HeroSection({ heroImage }) {
 
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-forest">
-      <video
-        src="/hero-video.mp4"
-        poster={heroImage || HERO_IMAGE}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
+      <img
+        src={heroImage || HERO_IMAGE}
+        alt="Dubai skyline at dusk"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-forest/70 via-forest/40 to-forest/90" />
