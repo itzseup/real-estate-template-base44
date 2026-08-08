@@ -61,21 +61,24 @@ export default function HeroSection({ heroImage }) {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background image of Downtown Dubai */}
-      <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      />
-      
-      {/* Fallback background for when image doesn't load */}
-      <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat hidden"
-        style={{ 
-          backgroundImage: `url('https://images.unsplash.com/photo-1512436979644-789af45e1434?ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fDEzfQ&auto=format&fit=crop&w=1950&q=80')`,
-          backgroundColor: '#0a0a0a'
-        }}
-      />
-        
+      {/* Video background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+        {/* Fallback image if video fails to load */}
+        <img
+          src={backgroundImage}
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      </video>
+
+      {/* Dark overlay gradient for readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
 
       <div className="relative z-10 h-full flex flex-col justify-center md:justify-start md:pt-[35vh] px-[4%] md:px-12 max-w-[1400px] mx-auto">
