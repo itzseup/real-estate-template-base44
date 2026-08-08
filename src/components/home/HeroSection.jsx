@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
@@ -9,6 +9,9 @@ const priceRanges = ["Any Price", "Under $2M", "$2M – $5M", "$5M – $10M", "$
 
 // Default background image of Downtown Dubai
 const DEFAULT_BG_IMAGE = "https://images.unsplash.com/photo-1512436979644-789af475e4ba?ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fDEzfQ&auto=format&fit=crop&w=1950&q=80";
+
+// Floating particle colors (subtle amber/gold for luxury accent)
+const PARTICLE_COLORS = ["#ffffff", "#fbbf24", "#f59e0b", "#ffffff", "#ffffff"];
 
 function SearchDropdown({ label, options, value, onChange }) {
   const [open, setOpen] = useState(false);
@@ -46,6 +49,30 @@ export default function HeroSection({ heroImage }) {
 
   const backgroundImage = heroImage || DEFAULT_BG_IMAGE;
 
+  // --- Animated gradient parallax (cursor-based) ---
+  const parallaxRef = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!parallaxRef.current) return;
+      const rect = parallaxRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      setMousePos({ x, y });
+    };
+    const el = parallaxRef.current;
+    if (el) {
+      el.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
+    return () => {
+      if (el) el.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  // Parallax transform: shift the gradient background subtly based on cursor
+  const parallaxTransform = `translate(${(mousePos.x - 0.5) * -12}px, ${(mousePos.y - 0.5) * -12}px)`;
+
   const handleSearch = () => {
     const params = new URLSearchParams();
     if (loc !== "Any Location") params.set("location", loc);
@@ -60,26 +87,59 @@ export default function HeroSection({ heroImage }) {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
-      {/* Video background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/hero-bg.mp4" type="video/mp4" />
-        {/* Fallback image if video fails to load */}
-        <img
-          src={backgroundImage}
-          alt="Background"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      </video>
+    <section
+      ref={parallaxRef}
+      className="relative h-screen w-full overflow-hidden"
+    >
+      {/* Animated gradient background layer */}
+      <div
+        className="absolute inset-0 w-full h-full"
+        style={{
+          // Deep luxury palette: indigo → teal → midnight → navy, flowing
+          background: `radial-gradient(1200px 600px at ${20 + mousePos.x * 20}% ${30 + mousePos.y * 10}%, #1e3a8a, transparent 60%), radial-gradient(1200px 600px at ${80 + mousePos.x * -5}% ${70 + mousePos.y * 10}%, #0f172a 0%, transparent 60%), #0a0a0a`,
+          transform: parallaxTransform,
+          transition: "transform 0.1s ease-out",
+        }}
+      />
+
+      {/* Subtle animated gradient sweep overlay */}
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: "linear-gradient(110deg, rgba(30,58,138,0.15) 0%, rgba(15,23,42,0.1) 50%, rgba(13,17,23,0.15) 100%)",
+          backgroundSize: "400% 400%",
+          animationName: "gradient-sweep",
+          animationDuration: "20s",
+          animationTimingFunction: "ease",
+          animationIterationCount: "infinite",
+        }}
+      />
+
+      {/* Floating particles for depth — rendered via pseudo-elements + CSS animation */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {PARTICLE_COLORS.map((color, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full opacity-40"
+            style={{
+              width: `${2 + (i % 3)}px`,
+              height: `${2 + (i % 3)}px`,
+              backgroundColor: color,
+              left: `${10 + (i * 13) % 80}%`,
+              top: `${15 + (i * 17) % 80}%`,
+              boxShadow: `0 0 ${8 + (i * 3)}px ${color}`,
+              animationName: `float-${i % 3}`,
+              animationDuration: `${15 + (i * 4)}s`,
+              animationTimingFunction: "linear",
+              animationIterationCount: "infinite",
+              animationDelay: `-${(i * 3) % 12}s`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Dark overlay gradient for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
 
       <div className="relative z-10 h-full flex flex-col justify-center md:justify-start md:pt-[35vh] px-[4%] md:px-12 max-w-[1400px] mx-auto">
         <motion.div
@@ -125,5 +185,6 @@ export default function HeroSection({ heroImage }) {
           </div>
         </motion.div>
       </div>
-    </section>);
+    </section>
+  );
 }
