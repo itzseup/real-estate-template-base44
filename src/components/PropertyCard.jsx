@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { getBadgeForProperty } from "@/lib/badgeUtils"
 
 export default function PropertyCard({ property, size = "default", badges: badgeProp }) {
-  const badgeData = badges || getBadgeForProperty(property)
+  const badgeData = badgeProp || getBadgeForProperty(property)
   const badgeList = badgeData?.badges || []
 
   const sizeClasses = {

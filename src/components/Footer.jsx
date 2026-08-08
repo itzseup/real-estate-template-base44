@@ -1,60 +1,97 @@
 import { Link } from "react-router-dom"
-import { Button } from "@/components/ui/button"
+import { ArrowUpRight } from "lucide-react"
+import { CONTACT, FOOTER_COLUMNS, LEGAL_LINKS, SOCIAL_LINKS } from "@/data/site"
 
 export default function Footer() {
+  const year = new Date().getFullYear()
+
   return (
-    <footer className="bg-secondary/30 border-t border-border">
-      <div className="px-[4%] md:px-[2%] py-12 md:py-16 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="bg-forest text-white">
+      <div className="mx-auto max-w-shell px-[5%] py-16 md:py-20 xl:px-10">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
+          {/* Contact block */}
           <div>
-            <h3 className="font-display text-lg font-light mb-4">Maison Estate</h3>
-            <p className="font-body text-sm text-muted-foreground leading-relaxed">
-              For over two decades, Maison Estate has been the definitive authority in luxury real estate.
+            <Link to="/" className="font-display text-2xl">
+              White &amp; Co.
+            </Link>
+            <a
+              href={CONTACT.phoneHref}
+              className="mt-6 block font-display text-2xl transition-opacity hover:opacity-70 md:text-3xl"
+            >
+              {CONTACT.phone}
+            </a>
+            <p className="mt-6 font-body text-sm text-white/70">{CONTACT.company}</p>
+            <p className="mt-1 max-w-xs font-body text-sm leading-relaxed text-white/70">
+              {CONTACT.address}
             </p>
+            <a
+              href={CONTACT.directionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-1 font-body text-[11px] uppercase tracking-label text-orange-accent transition-opacity hover:opacity-70"
+            >
+              Get Directions
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </a>
           </div>
-          
+
+          {FOOTER_COLUMNS.map((column) => (
+            <div key={column.title}>
+              <h2 className="font-body text-[11px] uppercase tracking-label text-white/50">
+                {column.title}
+              </h2>
+              <ul className="mt-5 space-y-3">
+                {column.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      to={link.href}
+                      className="font-body text-sm text-white/85 transition-opacity hover:opacity-60"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
           <div>
-            <h4 className="font-display text-sm font-light mb-4 uppercase tracking-label text-muted-foreground">
-              Pages
-            </h4>
-            <ul className="space-y-3 font-body">
-              <li><Link to="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</Link></li>
-              <li><Link to="/properties" className="text-muted-foreground hover:text-foreground transition-colors">Properties</Link></li>
-              <li><Link to="/blog" className="text-muted-foreground hover:text-foreground transition-colors">Blog</Link></li>
-              <li><Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-display text-sm font-light mb-4 uppercase tracking-label text-muted-foreground">
-              Services
-            </h4>
-            <ul className="space-y-3 font-body">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Buy</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Sell</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Rent</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Commercial</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 className="font-display text-sm font-light mb-4 uppercase tracking-label text-muted-foreground">
-              Contact
-            </h4>
-            <ul className="space-y-3 font-body">
-              <li><a href="tel:+1234567890" className="text-muted-foreground hover:text-foreground transition-colors">+1 (234) 567-8900</a></li>
-              <li><a href="mailto:info@maisonestate.com" className="text-muted-foreground hover:text-foreground transition-colors">info@maisonestate.com</a></li>
+            <h2 className="font-body text-[11px] uppercase tracking-label text-white/50">
+              Connect
+            </h2>
+            <ul className="mt-5 space-y-3">
+              {SOCIAL_LINKS.map((social) => (
+                <li key={social.label}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-sm text-white/85 transition-opacity hover:opacity-60"
+                  >
+                    {social.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
-        
-        <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center font-body text-sm text-muted-foreground">
-          <p>&copy; 2024 Maison Estate. All rights reserved.</p>
-          <div className="flex gap-6 mt-4 md:mt-0">
-            <Link to="/accessibility" className="hover:text-foreground transition-colors">Accessibility</Link>
-            <Link to="/terms" className="hover:text-foreground transition-colors">Terms</Link>
-          </div>
+
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-8 md:flex-row md:items-center md:justify-between">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {LEGAL_LINKS.map((link) => (
+              <li key={link.label}>
+                <Link
+                  to={link.href}
+                  className="font-body text-xs text-white/60 transition-opacity hover:opacity-100"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="font-body text-xs text-white/50">
+            &copy; {year} {CONTACT.company}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
