@@ -1,0 +1,145 @@
+{
+  "name": "Property",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "slug": {
+      "type": "string",
+      "title": "Slug"
+    },
+    "price": {
+      "type": "number",
+      "title": "Price"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "For Sale",
+        "For Rent",
+        "Sold",
+        "Pending"
+      ],
+      "title": "Status"
+    },
+    "property_type": {
+      "type": "string",
+      "enum": [
+        "Penthouse",
+        "Waterfront",
+        "Modernist",
+        "Estate",
+        "Townhouse",
+        "Condo"
+      ],
+      "title": "Property Type"
+    },
+    "bedrooms": {
+      "type": "number",
+      "title": "Bedrooms"
+    },
+    "bathrooms": {
+      "type": "number",
+      "title": "Bathrooms"
+    },
+    "sqft": {
+      "type": "number",
+      "title": "Square Feet"
+    },
+    "lot_size": {
+      "type": "string",
+      "title": "Lot Size"
+    },
+    "year_built": {
+      "type": "number",
+      "title": "Year Built"
+    },
+    "description": {
+      "type": "string",
+      "title": "Description"
+    },
+    "short_description": {
+      "type": "string",
+      "title": "Short Description"
+    },
+    "address": {
+      "type": "string",
+      "title": "Address"
+    },
+    "city": {
+      "type": "string",
+      "title": "City"
+    },
+    "neighborhood": {
+      "type": "string",
+      "title": "Neighborhood"
+    },
+    "state": {
+      "type": "string",
+      "title": "State"
+    },
+    "zip_code": {
+      "type": "string",
+      "title": "ZIP Code"
+    },
+    "latitude": {
+      "type": "number",
+      "title": "Latitude"
+    },
+    "longitude": {
+      "type": "number",
+      "title": "Longitude"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Images"
+    },
+    "featured_image": {
+      "type": "string",
+      "title": "Featured Image"
+    },
+    "video_url": {
+      "type": "string",
+      "title": "Video URL"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Features"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "title": "Featured"
+    },
+    "is_high_priority": {
+      "type": "boolean",
+      "title": "High Priority"
+    },
+    "agent_id": {
+      "type": "string",
+      "title": "Agent ID"
+    },
+    "garage": {
+      "type": "number",
+      "title": "Garage Spaces"
+    },
+    "price_per_sqft": {
+      "type": "number",
+      "title": "Price Per Sqft"
+    }
+  },
+  "required": [
+    "title",
+    "price",
+    "property_type",
+    "city",
+    "status"
+  ]
+}

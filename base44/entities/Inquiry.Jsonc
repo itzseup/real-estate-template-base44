@@ -1,0 +1,55 @@
+{
+  "name": "Inquiry",
+  "type": "object",
+  "properties": {
+    "full_name": {
+      "type": "string",
+      "title": "Full Name"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone"
+    },
+    "message": {
+      "type": "string",
+      "title": "Message"
+    },
+    "property_id": {
+      "type": "string",
+      "title": "Property ID"
+    },
+    "inquiry_type": {
+      "type": "string",
+      "enum": [
+        "General",
+        "Tour Request",
+        "Price Inquiry",
+        "Virtual Tour"
+      ],
+      "title": "Inquiry Type"
+    },
+    "preferred_date": {
+      "type": "string",
+      "title": "Preferred Date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Contacted",
+        "Scheduled",
+        "Closed"
+      ],
+      "title": "Status"
+    }
+  },
+  "required": [
+    "full_name",
+    "email",
+    "inquiry_type"
+  ]
+}

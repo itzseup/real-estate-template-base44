@@ -1,0 +1,30 @@
+{
+  "name": "Testimonial",
+  "type": "object",
+  "properties": {
+    "client_name": {
+      "type": "string",
+      "title": "Client Name"
+    },
+    "quote": {
+      "type": "string",
+      "title": "Quote"
+    },
+    "property_type": {
+      "type": "string",
+      "title": "Property Type"
+    },
+    "location": {
+      "type": "string",
+      "title": "Location"
+    },
+    "rating": {
+      "type": "number",
+      "title": "Rating"
+    }
+  },
+  "required": [
+    "client_name",
+    "quote"
+  ]
+}

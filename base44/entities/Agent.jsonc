@@ -1,0 +1,61 @@
+{
+  "name": "Agent",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Full Name"
+    },
+    "title": {
+      "type": "string",
+      "title": "Title/Role"
+    },
+    "bio": {
+      "type": "string",
+      "title": "Biography"
+    },
+    "photo": {
+      "type": "string",
+      "title": "Photo URL"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone"
+    },
+    "specializations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Specializations"
+    },
+    "notable_sales": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Notable Sales"
+    },
+    "years_experience": {
+      "type": "number",
+      "title": "Years Experience"
+    },
+    "total_sales_volume": {
+      "type": "string",
+      "title": "Total Sales Volume"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "title": "Featured Agent"
+    }
+  },
+  "required": [
+    "name",
+    "title",
+    "email"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "name": "BlogPost",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "title": "Title"
+    },
+    "slug": {
+      "type": "string",
+      "title": "Slug"
+    },
+    "excerpt": {
+      "type": "string",
+      "title": "Excerpt"
+    },
+    "content": {
+      "type": "string",
+      "title": "Content"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Market Report",
+        "Design & Architecture",
+        "Neighborhood Guide",
+        "Investment"
+      ],
+      "title": "Category"
+    },
+    "featured_image": {
+      "type": "string",
+      "title": "Featured Image"
+    },
+    "author_name": {
+      "type": "string",
+      "title": "Author Name"
+    },
+    "read_time": {
+      "type": "number",
+      "title": "Read Time (min)"
+    }
+  },
+  "required": [
+    "title",
+    "excerpt",
+    "category"
+  ]
+}
