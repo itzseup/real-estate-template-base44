@@ -1,6 +1,6 @@
-# SPA fallback - serve index.html for all non-file routes
-# Cloudflare Pages handles this via `pages_build_output_dir` + `[[routes]]`
-# but adding explicit headers for caching strategy
+# HTTP headers for caching & security on Cloudflare Pages
+# SPA routing is handled by [assets] not_found_handling = "single-page-application"
+# in wrangler.toml
 
 /*
   X-Frame-Options: DENY
