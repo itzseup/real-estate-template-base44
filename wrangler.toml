@@ -1,12 +1,14 @@
-# Cloudflare Pages configuration
+# Cloudflare configuration for real-estate-template-base44
 # https://developers.cloudflare.com/pages/
-# https://developers.cloudflare.com/pages/platform/configuration/
+# https://developers.cloudflare.com/workers/platform/configuration/
 
-# The build output directory (what gets deployed to Cloudflare Pages)
-pages_build_output_dir = "dist"
+name = "real-estate-template-base44"
+compatibility_date = "2026-08-09"
 
-# Project name on Cloudflare Pages
-name = "real-estate-template"
+# Deploy from the Vite build output directory
+[assets]
+directory = "./dist"
+not_found_handling = "single-page-application"
 
 # Environment variables are set in the Cloudflare Pages dashboard:
 #   Settings → Environment Variables → Production
@@ -15,10 +17,5 @@ name = "real-estate-template"
 #   VITE_SUPABASE_ANON_KEY    = your-supabase-anon-key
 #   VITE_BASE44_URL           = your-supabase-project-url (base44 compat)
 #   VITE_BASE44_ANON_KEY      = your-supabase-anon-key (base44 compat)
-
-# SPA routing is handled by:
-#   1. functions/_middleware.js (Cloudflare Pages Functions) - primary fallback
-#   2. public/_redirects (static redirect rules) - backup
-#   3. public/_headers (HTTP headers for caching & security)
 [vars]
   APP_NAME = "Real Estate Template"
