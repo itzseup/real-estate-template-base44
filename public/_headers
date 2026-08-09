@@ -1,0 +1,14 @@
+# SPA fallback - serve index.html for all non-file routes
+# Cloudflare Pages handles this via `pages_build_output_dir` + `[[routes]]`
+# but adding explicit headers for caching strategy
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate

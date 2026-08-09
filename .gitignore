@@ -38,3 +38,6 @@ yarn-error.log*
 .hermes/desktop-attachments/
 
 .vercel
+
+# Cloudflare
+.wrangler

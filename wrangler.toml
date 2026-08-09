@@ -1,0 +1,24 @@
+# Cloudflare Pages configuration
+# https://developers.cloudflare.com/pages/
+# https://developers.cloudflare.com/pages/platform/configuration/
+
+# The build output directory (what gets deployed to Cloudflare Pages)
+pages_build_output_dir = "dist"
+
+# Project name on Cloudflare Pages
+name = "real-estate-template"
+
+# Environment variables are set in the Cloudflare Pages dashboard:
+#   Settings → Environment Variables → Production
+# Required for the app to function:
+#   VITE_SUPABASE_URL         = your-supabase-project-url
+#   VITE_SUPABASE_ANON_KEY    = your-supabase-anon-key
+#   VITE_BASE44_URL           = your-supabase-project-url (base44 compat)
+#   VITE_BASE44_ANON_KEY      = your-supabase-anon-key (base44 compat)
+
+# SPA routing is handled by:
+#   1. functions/_middleware.js (Cloudflare Pages Functions) - primary fallback
+#   2. public/_redirects (static redirect rules) - backup
+#   3. public/_headers (HTTP headers for caching & security)
+[vars]
+  APP_NAME = "Real Estate Template"
