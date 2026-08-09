@@ -15,10 +15,10 @@ import ContactPage from "@/pages/Contact"
 import OurTeamPage from "@/pages/OurTeam"
 import CareersPage from "@/pages/Careers"
 import BlogPage from "@/pages/Blog"
+import BlogDetailPage from "@/pages/BlogDetail"
 import SellPage from "@/pages/Sell"
 import TermsPage from "@/pages/Terms"
 
-/** Every route shares the site chrome; only the home page sits under a transparent header. */
 const ROUTES = [
   { path: "/", element: <HomePage />, transparent: true },
   { path: "/properties", element: <PropertiesPage /> },
@@ -32,6 +32,7 @@ const ROUTES = [
   { path: "/our-team", element: <OurTeamPage /> },
   { path: "/careers", element: <CareersPage /> },
   { path: "/blog", element: <BlogPage /> },
+  { path: "/blog/:id", element: <BlogDetailPage /> },
   { path: "/contact", element: <ContactPage /> },
   { path: "/terms", element: <TermsPage /> },
   { path: "/accessibility", element: <AccessibilityPage /> },

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { base44 } from "@/api/base44Client"
+import Seo from "@/components/Seo"
+import { DEFAULT_OG_IMAGE, breadcrumbSchema } from "@/lib/seo"
 import AdvisorCard from "@/components/about/AdvisorCard"
 
 export default function OurTeamPage() {
@@ -35,6 +37,16 @@ export default function OurTeamPage() {
 
   return (
     <div className="min-h-screen bg-white py-24 md:py-40 px-[4%] md:px-[2%]">
+      <Seo
+        title="Our Team"
+        description="Meet the City Walk Real Estate LLC team of UAE real estate advisors. Each specialist brings deep local knowledge to buying, selling, and renting."
+        image={DEFAULT_OG_IMAGE}
+        url="/meet-the-team"
+        schema={breadcrumbSchema([
+          { name: "Home", url: "https://citywalkrealestatellc.com" },
+          { name: "Meet the Team", url: "https://citywalkrealestatellc.com/meet-the-team" },
+        ])}
+      />
       <div className="max-w-[1400px] mx-auto">
         <div className="text-center mb-16 md:mb-24">
           <h1 className="font-display text-display-xl font-light mt-3">

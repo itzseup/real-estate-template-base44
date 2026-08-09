@@ -44,7 +44,7 @@ export default function HeroSection({ heroImage }) {
           className="max-w-2xl"
         >
           <h1 className="font-display text-display-xl text-white">
-            Dubai Real Estate
+            Ajman Real Estate
             <span className="mt-1 block font-semibold italic">Built Better</span>
           </h1>
           <p className="mt-6 max-w-xl font-body text-base leading-relaxed text-white/85">

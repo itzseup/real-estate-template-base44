@@ -53,7 +53,7 @@ export default function Header({ transparent = false }) {
           to="/"
           className={`font-display text-xl tracking-tight transition-colors md:text-2xl ${textClass}`}
         >
-          White &amp; Co.
+          City Walk Real Estate LLC
         </Link>
 
         <nav aria-label="Main navigation" className="hidden items-center gap-7 lg:flex">

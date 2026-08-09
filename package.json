@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node scripts/build-sitemap.js",
     "preview": "vite preview",
     "lint": "eslint src --ext js,jsx,ts,tsx"
   },
@@ -26,6 +26,7 @@
     "react": "^18.3.1",
     "react-day-picker": "^8.10.2",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^3.0.0",
     "react-hook-form": "^7.50.1",
     "react-router-dom": "^6.23.0",
     "recharts": "^2.12.4",

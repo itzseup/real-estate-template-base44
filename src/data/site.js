@@ -1,5 +1,5 @@
 /**
- * Static site content for the White & Co. marketing pages.
+ * Static site content for the City Walk Real Estate LLC marketing pages.
  *
  * Everything here is placeholder/demo content. Live listing data still comes
  * from the Supabase-backed client in `@/api/base44Client`; these constants only
@@ -25,7 +25,7 @@ export const HERO_IMAGE =
 export const TEAM_IMAGE =
   "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=2000&q=80"
 
-/** Cards under "Explore Property in Dubai". */
+/** Cards under "Explore Property in Ajman". */
 export const PROPERTY_TYPES = [
   { label: "Buy", href: "/properties", image: unsplash("photo-1613977257363-707ba9348227") },
   { label: "Rent", href: "/properties/rent", image: unsplash("photo-1502672260266-1c1ef2d93688") },
@@ -39,7 +39,7 @@ export const PROPERTY_TYPES = [
   },
 ]
 
-/** Slides for the "Why White & Co" carousel. */
+/** Slides for the "Why City Walk Real Estate LLC" carousel. */
 export const WHY_SLIDES = [
   {
     title: "A Smoother Path to Completion",
@@ -70,10 +70,10 @@ export const TRUST_STATS = [
   { value: "4.9", label: "Google Rating", detail: "From 1,900 Reviews", isRating: true },
   { value: "6,400+", label: "Property Transactions", detail: "2025 to date" },
   { value: "7", label: "Days a week", detail: "We work round the clock" },
-  { value: "250+", label: "Advisors", detail: "Across Dubai communities" },
+  { value: "250+", label: "Advisors", detail: "Across UAE communities" },
 ]
 
-/** Horizontal rail on the dark "Explore Communities in Dubai" section. */
+/** Horizontal rail on the dark "Explore Communities in UAE" section. */
 export const COMMUNITIES = [
   { name: "Palm Jumeirah", image: unsplash("photo-1518684079-3c830dcef090", 800, 1000) },
   { name: "Dubai Marina", image: unsplash("photo-1512453979798-5ea266f8880c", 800, 1000) },
@@ -93,12 +93,13 @@ export const COMMUNITIES = [
 ]
 
 export const CONTACT = {
-  phone: "+971 4 876 2333",
-  phoneHref: "tel:+97148762333",
-  company: "White & Co Real Estate LLC",
-  address: "7th, 8th & 20th Floor, Control Tower, Motor City, Dubai, UAE",
+  phone: "+971 56 603 6117",
+  phoneHref: "tel:+971566036117",
+  email: "rafat@citywalkrealestatellc.com",
+  company: "City Walk Real Estate LLC",
+  address: "Office 30, City Towers A1, Al Nuamiya 3, Ajman, UAE",
   directionsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Control+Tower+Motor+City+Dubai",
+    "https://www.google.com/maps/search/?api=1&query=City+Towers+A1+Al+Nuamiya+3+Ajman+UAE",
 }
 
 export const FOOTER_COLUMNS = [

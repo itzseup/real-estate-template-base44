@@ -14,7 +14,7 @@ export default function MissionSection() {
             <span className="italic">Distinction</span>
           </h1>
           <p className="font-body text-muted-foreground leading-[1.8] mb-6">
-            For over two decades, Maison Estate has been the definitive authority in luxury real estate. 
+            For over two decades, City Walk Real Estate LLC has been the definitive authority in luxury real estate. 
             We don't simply list properties—we curate collections. Our philosophy is rooted in the belief 
             that finding the right home is an act of self-expression, one that deserves the same care 
             and sophistication as acquiring a masterwork of art.

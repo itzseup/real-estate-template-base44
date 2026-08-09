@@ -1,29 +1,31 @@
 import { Link } from "react-router-dom"
+import Seo from "@/components/Seo"
+import { breadcrumbSchema } from "@/lib/seo"
 
 const ROLES = [
   {
     title: "Property Consultant — Secondary Sales",
-    location: "Motor City, Dubai",
+    location: "Ajman, UAE",
     type: "Full time",
     summary:
       "Own a community, build a listing base and take clients from first viewing to transfer at the DLD.",
   },
   {
     title: "Leasing Advisor",
-    location: "Motor City, Dubai",
+    location: "Ajman, UAE",
     type: "Full time",
     summary:
       "Handle landlord instructions and tenant enquiries across long-let apartments and villas.",
   },
   {
     title: "Off Plan Specialist",
-    location: "Motor City, Dubai",
+    location: "Ajman, UAE",
     type: "Full time",
     summary: "Work directly with developers on launches, allocations and investor payment plans.",
   },
   {
     title: "Marketing Executive",
-    location: "Motor City, Dubai",
+    location: "Ajman, UAE",
     type: "Full time",
     summary: "Run listing campaigns, community guides and the video pipeline across our channels.",
   },
@@ -32,6 +34,11 @@ const ROLES = [
 export default function CareersPage() {
   return (
     <div className="bg-white">
+      <Seo
+        title="Careers at City Walk Real Estate LLC"
+        description="Join City Walk Real Estate LLC — Dubai's leading real estate team. We train advisors, pair them with senior brokers, and provide marketing support for career growth."
+        url="/careers"
+      />
       <section className="relative h-[46vh] min-h-[320px] w-full overflow-hidden bg-forest">
         <img
           src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=80"

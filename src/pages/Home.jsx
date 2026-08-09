@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { base44 } from "@/api/base44Client"
+import Seo from "@/components/Seo"
 import HeroSection from "@/components/home/HeroSection"
 import PropertyTypes from "@/components/home/PropertyTypes"
 import WhyAndNews from "@/components/home/WhyAndNews"
@@ -33,6 +34,11 @@ export default function HomePage() {
 
   return (
     <div className="bg-white">
+      <Seo
+        title="Ajman Real Estate"
+        description="City Walk Real Estate LLC — buying, selling, renting and investing in UAE real estate, handled end to end."
+        url="/"
+      />
       <HeroSection heroImage={heroImage} />
       <PropertyTypes />
       <WhyAndNews />

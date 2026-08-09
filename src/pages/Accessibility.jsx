@@ -1,8 +1,20 @@
 import React from "react"
+import Seo from "@/components/Seo"
+import { DEFAULT_OG_IMAGE, breadcrumbSchema } from "@/lib/seo"
 
 export default function AccessibilityPage() {
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="Accessibility Statement"
+        description="City Walk Real Estate LLC is committed to ensuring digital accessibility for all users, including those with disabilities."
+        image={DEFAULT_OG_IMAGE}
+        url="/accessibility"
+        schema={breadcrumbSchema([
+          { name: "Home", url: "https://citywalkrealestatellc.com" },
+          { name: "Accessibility", url: "https://citywalkrealestatellc.com/accessibility" },
+        ])}
+      />
       <section className="py-24 md:py-40 px-[4%] md:px-[2%] max-w-[1400px] mx-auto">
         <div className="text-center mb-16 md:mb-24">
           <h1 className="font-display text-display-xl font-light mt-3">
@@ -16,7 +28,7 @@ export default function AccessibilityPage() {
         <div className="prose prose-lg max-w-4xl mx-auto">
           <h2 className="font-display text-display-md font-light mb-4">Our Commitment</h2>
           <p className="font-body text-muted-foreground leading-[1.8]">
-            Maison Estate is committed to ensuring digital accessibility for all users, including those with disabilities.
+            City Walk Real Estate LLC is committed to ensuring digital accessibility for all users, including those with disabilities.
             We continually improve the user experience for everyone and apply relevant accessibility standards.
           </p>
 

@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { base44 } from "@/api/base44Client"
+import Seo from "@/components/Seo"
+import { DEFAULT_OG_IMAGE, breadcrumbSchema } from "@/lib/seo"
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -33,6 +35,12 @@ export default function ContactPage() {
     return (
       <div className="min-h-screen bg-white py-24 md:py-40 px-[4%] md:px-[2%]">
         <div className="max-w-[600px] mx-auto text-center">
+          <Seo
+            title="Thank You"
+            description="Thank you for your enquiry. One of our advisors will contact you within 24 hours."
+            url="/contact"
+            noIndex
+          />
           <h1 className="font-display text-display-lg font-light mb-6">Thank You</h1>
           <p className="font-body text-muted-foreground leading-relaxed">
             Thank you for reaching out. One of our advisors will contact you within 24 hours.
@@ -45,6 +53,16 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white py-24 md:py-40 px-[4%] md:px-[2%]">
       <div className="max-w-[600px] mx-auto">
+        <Seo
+          title="Contact"
+          description="Get in touch with City Walk Real Estate LLC for UAE real estate inquiries. Fill out our form and we'll respond within 24 hours."
+          image={DEFAULT_OG_IMAGE}
+          url="/contact"
+          schema={breadcrumbSchema([
+            { name: "Home", url: "https://citywalkrealestatellc.com" },
+            { name: "Contact", url: "https://citywalkrealestatellc.com/contact" },
+          ])}
+        />
         <h1 className="font-display text-display-xl font-light mt-3 mb-8">
           Get in <span className="italic">Touch</span>
         </h1>

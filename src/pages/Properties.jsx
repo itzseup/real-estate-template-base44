@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { base44 } from "@/api/base44Client"
+import Seo from "@/components/Seo"
 import PropertyCard from "@/components/PropertyCard"
+import { DEFAULT_OG_IMAGE, breadcrumbSchema } from "@/lib/seo"
 
 export default function PropertiesPage() {
   const [searchParams] = useSearchParams()
@@ -68,6 +70,16 @@ export default function PropertiesPage() {
 
   return (
     <div className="min-h-screen bg-white py-24 md:py-40 px-[4%] md:px-[2%]">
+      <Seo
+        title="Properties for Sale in Dubai"
+        description="Browse our curated selection of luxury properties for sale in Dubai. Filter by location, price, and type to find your perfect home."
+        image={DEFAULT_OG_IMAGE}
+        url="/properties"
+        schema={breadcrumbSchema([
+          { name: "Home", url: "https://citywalkrealestatellc.com" },
+          { name: "Properties", url: "https://citywalkrealestatellc.com/properties" },
+        ])}
+      />
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-12">
           <h1 className="font-display text-display-xl font-light mt-3">

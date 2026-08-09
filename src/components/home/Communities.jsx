@@ -18,7 +18,7 @@ export default function Communities() {
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <h2 className="font-display text-display-lg text-white">
-              Explore Communities in Dubai
+              Explore Communities in UAE
             </h2>
             <p className="mt-5 font-body text-base leading-relaxed text-white/75">
               Every community trades differently — on service charges, handover timing, rental

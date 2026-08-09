@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://whiteandco.ae/sitemap.xml
+
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_app/
+Disallow: /_middleware/
+Disallow: /search
+Disallow: /*?*

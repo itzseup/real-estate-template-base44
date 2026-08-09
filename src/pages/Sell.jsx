@@ -1,4 +1,6 @@
 import { useState } from "react"
+import Seo from "@/components/Seo"
+import { breadcrumbSchema } from "@/lib/seo"
 
 export default function SellPage() {
   const [formData, setFormData] = useState({
@@ -29,6 +31,11 @@ export default function SellPage() {
 
   return (
     <div className="min-h-screen bg-white py-24 md:py-40 px-[4%] md:px-[2%]">
+      <Seo
+        title="Sell Your Property"
+        description="Get a free, no-obligation property valuation from our UAE real estate experts. We handle the entire sale process end to end."
+        url="/sell"
+      />
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="font-display text-display-xl font-light mt-3">

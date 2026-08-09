@@ -1,15 +1,27 @@
 import React from "react"
+import Seo from "@/components/Seo"
+import { DEFAULT_OG_IMAGE, breadcrumbSchema } from "@/lib/seo"
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
+      <Seo
+        title="About"
+        description="For over two decades, City Walk Real Estate LLC has been the definitive authority in luxury UAE real estate. We handle buying, selling, renting, and investing with end-to-end care."
+        image={DEFAULT_OG_IMAGE}
+        url="/about"
+        schema={breadcrumbSchema([
+          { name: "Home", url: "https://citywalkrealestatellc.com" },
+          { name: "About", url: "https://citywalkrealestatellc.com/about" },
+        ])}
+      />
       <section className="py-24 md:py-40 px-[4%] md:px-[2%] max-w-[1400px] mx-auto">
         <div className="text-center mb-16 md:mb-24">
           <h1 className="font-display text-display-xl font-light mt-3">
-            About <span className="italic">Maison</span>
+            About <span className="italic">City Walk Real Estate LLC</span>
           </h1>
           <p className="font-body text-sm text-muted-foreground mt-4 max-w-lg mx-auto leading-relaxed">
-            For over two decades, Maison Estate has been the definitive authority in luxury real estate.
+            For over two decades, City Walk Real Estate LLC has been the definitive authority in luxury real estate.
           </p>
         </div>
 
@@ -19,7 +31,7 @@ export default function AboutPage() {
               Our <span className="italic">Philosophy</span>
             </h2>
             <p className="font-body text-muted-foreground leading-[1.8] mb-6">
-              For over two decades, Maison Estate has been the definitive authority in luxury real estate.
+              For over two decades, City Walk Real Estate LLC has been the definitive authority in luxury real estate.
               We don't simply list properties—we curate collections. Our philosophy is rooted in the belief
               that finding the right home is an act of self-expression, one that deserves the same care
               and sophistication as acquiring a masterwork of art.

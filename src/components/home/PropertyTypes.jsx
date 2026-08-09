@@ -7,7 +7,7 @@ export default function PropertyTypes() {
     <section className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-shell px-[5%] xl:px-10">
         <div className="max-w-2xl">
-          <h2 className="font-display text-display-lg text-forest">Explore Property in Dubai</h2>
+          <h2 className="font-display text-display-lg text-forest">Explore Property in Ajman</h2>
           <p className="mt-5 font-body text-base leading-relaxed text-forest/70">
             Whether you are buying a first apartment, listing a villa, leasing an office or tracking
             an off-plan handover, start with the category that matches what you need.

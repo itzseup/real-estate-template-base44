@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Contact block */}
           <div>
             <Link to="/" className="font-display text-2xl">
-              White &amp; Co.
+              City Walk Real Estate LLC
             </Link>
             <a
               href={CONTACT.phoneHref}

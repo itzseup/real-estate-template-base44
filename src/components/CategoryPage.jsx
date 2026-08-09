@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { base44 } from "@/api/base44Client"
 import PropertyCard from "@/components/PropertyCard"
+import Seo from "@/components/Seo"
+import { DEFAULT_OG_IMAGE, breadcrumbSchema } from "@/lib/seo"
 
 /**
  * Shared marketing shell for the listing categories (rent, off plan,
@@ -13,9 +15,12 @@ import PropertyCard from "@/components/PropertyCard"
  * @param {string} props.title      Section headline.
  * @param {string} props.intro      Supporting paragraph.
  * @param {string} props.image      Full-bleed banner image URL.
+ * @param {string} [props.seoTitle]  SEO <title> (falls back to title).
+ * @param {string} [props.seoDescription] SEO description.
+ * @param {string} [props.seoUrl]   Canonical URL path.
  * @param {(property: object) => boolean} [props.filterFn] Client-side listing filter.
  */
-export default function CategoryPage({ eyebrow, title, intro, image, filterFn }) {
+export default function CategoryPage({ eyebrow, title, intro, image, seoTitle, seoDescription, seoUrl, filterFn }) {
   const [properties, setProperties] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -42,6 +47,16 @@ export default function CategoryPage({ eyebrow, title, intro, image, filterFn })
 
   return (
     <div className="bg-white">
+      <Seo
+        title={seoTitle || title}
+        description={seoDescription}
+        image={DEFAULT_OG_IMAGE}
+        url={seoUrl}
+        schema={breadcrumbSchema([
+          { name: "Home", url: "https://citywalkrealestatellc.com" },
+          { name: title, url: `https://citywalkrealestatellc.com${seoUrl || "/"}` },
+        ])}
+      />
       <section className="relative h-[46vh] min-h-[320px] w-full overflow-hidden bg-forest">
         <img src={image} alt="" aria-hidden="true" className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-forest/60" />

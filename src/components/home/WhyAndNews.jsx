@@ -11,9 +11,9 @@ export default function WhyAndNews() {
   return (
     <section className="bg-cream py-16 md:py-24">
       <div className="mx-auto grid max-w-shell gap-12 px-[5%] md:grid-cols-2 md:gap-16 xl:px-10">
-        {/* Why White & Co — carousel */}
+        {/* Why City Walk Real Estate LLC — carousel */}
         <div>
-          <p className="eyebrow">Why White &amp; Co</p>
+          <p className="eyebrow">Why City Walk Real Estate LLC</p>
 
           <AnimatePresence mode="wait">
             <motion.div

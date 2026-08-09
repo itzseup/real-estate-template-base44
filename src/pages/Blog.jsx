@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { base44 } from "@/api/base44Client"
+import Seo from "@/components/Seo"
+import { DEFAULT_OG_IMAGE, breadcrumbSchema } from "@/lib/seo"
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([])
@@ -35,6 +37,16 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-white py-24 md:py-40 px-[4%] md:px-[2%]">
+      <Seo
+        title="Insights & Analysis"
+        description="Market insights, analysis, and trends from our team of UAE real estate experts."
+        image={DEFAULT_OG_IMAGE}
+        url="/blog"
+        schema={breadcrumbSchema([
+          { name: "Home", url: "https://citywalkrealestatellc.com" },
+          { name: "Blog", url: "https://citywalkrealestatellc.com/blog" },
+        ])}
+      />
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-16">
           <h1 className="font-display text-display-xl font-light mt-3">

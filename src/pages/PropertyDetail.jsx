@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { base44 } from "@/api/base44Client"
+import Seo from "@/components/Seo"
+import { DEFAULT_OG_IMAGE, realEstateListingSchema, breadcrumbSchema } from "@/lib/seo"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
@@ -59,6 +61,20 @@ export default function PropertyDetailPage() {
 
   return (
     <div className="min-h-screen bg-white py-12 md:py-24 px-[4%] md:px-[2%]">
+      <Seo
+        title={property.title}
+        description={property.description || "Dubai luxury real estate listing."}
+        image={property.featured_image || DEFAULT_OG_IMAGE}
+        url={`/property/${property.id}`}
+        schema={[
+          realEstateListingSchema(property),
+          breadcrumbSchema([
+            { name: "Home", url: "https://citywalkrealestatellc.com" },
+            { name: "Properties", url: "https://citywalkrealestatellc.com/properties" },
+            { name: property.title, url: `https://citywalkrealestatellc.com/property/${property.id}` },
+          ]),
+        ]}
+      />
       <div className="max-w-[1400px] mx-auto">
         <Link to="/properties" className="inline-flex items-center font-body text-sm text-muted-foreground hover:text-foreground mb-8">
           ← Back to Properties

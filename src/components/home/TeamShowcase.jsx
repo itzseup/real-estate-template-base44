@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { TEAM_IMAGE } from "@/data/site"
 
-/** Full-bleed associate directors image + the "Life at White & Co." copy block. */
+/** Full-bleed associate directors image + the "Life at City Walk Real Estate LLC" copy block. */
 export default function TeamShowcase() {
   return (
     <>
@@ -9,7 +9,7 @@ export default function TeamShowcase() {
         <figure className="relative aspect-[16/9] w-full overflow-hidden md:aspect-[21/9]">
           <img
             src={TEAM_IMAGE}
-            alt="White & Co. associate directors"
+            alt="City Walk Real Estate LLC associate directors"
             loading="lazy"
             className="h-full w-full object-cover"
           />
@@ -24,7 +24,7 @@ export default function TeamShowcase() {
       <section className="bg-white py-16 md:py-24">
         <div className="mx-auto max-w-shell px-[5%] xl:px-10">
           <div className="max-w-3xl">
-            <h2 className="font-display text-display-lg text-forest">Life at White &amp; Co.</h2>
+            <h2 className="font-display text-display-lg text-forest">Life at City Walk Real Estate LLC</h2>
             <p className="mt-6 font-body text-base leading-relaxed text-forest/70">
               We hire people who want to build a career, not close a single deal. New advisors are
               trained on the communities they will cover, shadow senior brokers on live listings, and
