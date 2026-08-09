@@ -1,6 +1,5 @@
-# Cloudflare configuration for real-estate-template-base44
+# Cloudflare Pages configuration for real-estate-template-base44
 # https://developers.cloudflare.com/pages/
-# https://developers.cloudflare.com/workers/platform/configuration/
 
 name = "real-estate-template-base44"
 compatibility_date = "2026-08-09"
@@ -8,10 +7,10 @@ compatibility_date = "2026-08-09"
 # Pages build output directory (used by `wrangler pages deploy`)
 pages_build_output_dir = "dist"
 
-# Assets config (used by `wrangler deploy` for Worker-based serving)
-[assets]
-directory = "./dist"
-not_found_handling = "single-page-application"
+# SPA routing is handled by:
+#   1. public/_redirects (/* → /index.html fallback)
+#   2. functions/_middleware.js (Cloudflare Pages Functions)
+#   3. public/_headers (security headers + asset caching)
 
 # Environment variables are set in the Cloudflare Pages dashboard:
 #   Settings → Environment Variables → Production
