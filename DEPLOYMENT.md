@@ -1,13 +1,52 @@
-# GoDaddy Deployment Guide
+# Deployment Guide
 
-## Build Output
+## Deploy to Cloudflare
+
+### Build & Deploy Commands
+```bash
+# Build locally
+npm run build
+
+# Deploy as a Worker (used by GitHub CI)
+npx wrangler deploy
+
+# Deploy as Pages (manual override)
+npx wrangler pages deploy dist --project-name=real-estate-template
+```
+
+### Project Configuration (`wrangler.toml`)
+- **Project name:** `real-estate-template-base44`
+- **Build output:** `dist/` (Vite production build)
+- **SPA routing:** `[assets]` with `not_found_handling = "single-page-application"`
+- **Caching headers:** `public/_headers` (1yr for assets, no-cache for HTML)
+
+### Cloudflare URLs
+- **Pages:** https://real-estate-template-5pw.pages.dev
+- **Workers:** https://real-estate-template-base44.shahoodaiesh297.workers.dev
+
+### Environment Variables (set in Cloudflare dashboard)
+| Variable | Description |
+|----------|-------------|
+| `VITE_SUPABASE_URL` | Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anon key |
+| `VITE_BASE44_URL` | Supabase project URL (base44 compat) |
+| `VITE_BASE44_ANON_KEY` | Supabase anon key (base44 compat) |
+
+### Custom Domain
+`citywalk.realestatellc.com` — add via Cloudflare Dashboard → Pages → Custom domains
+
+---
+
+## GoDaddy Deployment (Legacy)
+
+### Build Output
 After running `npm run build`, the following files are generated in `dist/`:
 - `index.html` - Main HTML file
 - `assets/index-*.js` - JavaScript bundle (can be large, ~600KB)
 - `assets/index-*.css` - CSS styles
 - `.htaccess` - SPA routing rules (needed for client-side routing)
 
-## Deployment Steps
+### Deployment Steps
 
 ### Option 1: Upload via FTP
 1. Use an FTP client (FileZilla, WinSCP) to connect to your GoDaddy hosting
@@ -26,7 +65,7 @@ After running `npm run build`, the following files are generated in `dist/`:
 2. Upload the ZIP to cPanel
 3. Extract it to `public_html/`
 
-## Important Notes
+### Important Notes
 
 1. **Environment Variables**: The app uses Supabase. You need to:
    - Create a `.env` file with your Supabase credentials:
@@ -49,10 +88,10 @@ After running `npm run build`, the following files are generated in `dist/`:
    - `agents` - Real estate agents
    - `properties` - Property listings
    - `blog_posts` - Blog articles
-   - `testimonials` - Client testimonials  
+   - `testimonials` - Client testimonials
    - `inquiries` - Contact form submissions
 
-## Testing Your Deployment
+### Testing Your Deployment
 After uploading:
 1. Visit your domain: `https://yourdomain.com/`
 2. Navigate to `/about`, `/properties`, `/contact` to test routing
