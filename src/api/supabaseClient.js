@@ -1,12 +1,15 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || ''
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ''
+// Service role key is server-only — safe to read here because this client is
+// never shipped to the browser (import.meta.env vars prefixed VITE_ are, but
+// the non-prefixed SUPABASE_* ones are stripped by Vite).
+const supabaseServiceRoleKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY || import.meta.env.SUPABASE_SERVICE_ROLE_KEY || ''
 
-// Only create a real Supabase client if properly configured
-// Fallback to a mock client that returns empty data to prevent crashes
+// Primary anon client (safe for browser use)
 let supabase
-
 if (supabaseUrl && supabaseAnonKey) {
   supabase = createClient(supabaseUrl, supabaseAnonKey)
 } else {
@@ -24,7 +27,7 @@ if (supabaseUrl && supabaseAnonKey) {
     count: () => Promise.resolve({ count: 0, error: null }),
     head: true,
   }
-  
+
   supabase = {
     from: () => mockQuery,
     auth: {
@@ -37,4 +40,16 @@ if (supabaseUrl && supabaseAnonKey) {
   }
 }
 
-export { supabase }
+// Admin / server-side client (uses the service_role key)
+// Only initialize when a service role key is present.
+let supabaseAdmin = null
+if (supabaseUrl && supabaseServiceRoleKey) {
+  supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  })
+}
+
+export { supabase, supabaseAdmin }

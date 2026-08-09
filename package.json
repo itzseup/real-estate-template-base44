@@ -8,7 +8,9 @@
     "dev": "vite",
     "build": "vite build && node scripts/build-sitemap.js",
     "preview": "vite preview",
-    "lint": "eslint src --ext js,jsx,ts,tsx"
+    "lint": "eslint src --ext js,jsx,ts,tsx",
+    "supabase:start": "supabase start",
+    "supabase:functions:serve": "supabase functions serve"
   },
   "dependencies": {
     "@base44/sdk": "^0.8.41",
