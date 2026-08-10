@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useAuth } from "@/lib/AuthContext"
 import Seo from "@/components/Seo"
@@ -8,11 +8,8 @@ import { Lock } from "lucide-react"
  * LoginPage — standalone login at /login.
  *
  * After a successful login, the user is redirected to /admin (or wherever
- * they were trying to go).
- *
- * Credentials are hardcoded: rafat@citywalkrealestatellc.com / Shahood@123
- * When Supabase is configured, these credentials are also created as a
- * Supabase Auth user automatically (see note below).
+ * they were trying to go). If Supabase is not configured, a demo login
+ * is used with hardcoded credentials.
  */
 
 const ADMIN_EMAIL = "rafat@citywalkrealestatellc.com"
@@ -26,15 +23,25 @@ export default function LoginPage() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [submitting, setSubmitting] = useState(false)
+  const [demoLoggedIn, setDemoLoggedIn] = useState(false)
 
   // Where to send the user after login — default to /admin
   const from = location.state?.from || "/admin"
 
+  // Redirect after successful demo login
+  useEffect(() => {
+    if (demoLoggedIn) {
+      localStorage.setItem("demo_admin_logged_in", "true")
+      navigate(from, { replace: true })
+    }
+  }, [demoLoggedIn, from, navigate])
+
   // If already logged in (Supabase), redirect to the destination
-  if (user) {
-    navigate(from, { replace: true })
-    return null
-  }
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true })
+    }
+  }, [user, from, navigate])
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -42,10 +49,7 @@ export default function LoginPage() {
 
     // Hardcoded credential check — works without Supabase
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-      // Store demo session in localStorage for Dashboard component
-      localStorage.setItem("demo_admin_logged_in", "true")
-      localStorage.setItem("demo_admin_email", email)
-      navigate(from, { replace: true })
+      setDemoLoggedIn(true)
       return
     }
 
