@@ -28,8 +28,7 @@ export default function AdminDashboard() {
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
 
-  // Demo login check for development without Supabase
-  const supabaseConfigured = !!import.meta.env.VITE_SUPABASE_URL
+  // Demo login check (demo login via /login page works regardless of Supabase config)
   const demoLoggedIn = localStorage.getItem("demo_admin_logged_in") === "true"
   const authenticated = user || demoLoggedIn
 
