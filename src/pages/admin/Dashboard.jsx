@@ -1,30 +1,59 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { base44 } from "@/api/base44Client"
+import { useAuth } from "@/lib/AuthContext"
 import Seo from "@/components/Seo"
-import { Plus, Edit2, Trash2, Save, X } from "lucide-react"
+import { Plus, Edit2, Trash2, Save, X, LogOut } from "lucide-react"
 
 /**
  * AdminDashboard — self-service panel for the client.
  *
- * Since this project uses a Base44-compatible Supabase layer, the client can
- * add/edit/delete agents and properties directly here without you touching
- * the code. They just need a browser and the live site.
+ * The client can add/edit/delete agents and properties directly here
+ * without you touching the code. They just need to log in at /login first.
  *
- * NOTE: For production, protect this route behind authentication. For now it
- * is open so the client can manage their data immediately. To lock it down,
- * see the ProtectedRoute component and add `<ProtectedRoute>` around this page.
+ * To add a new admin user:
+ *   1. Go to your Supabase project → Authentication → Users
+ *   2. Click "Add User" and enter the client's email + password
+ *   3. Share the credentials with the client — they log in at /login
+ *
+ * Access control: if the user is not authenticated, they are redirected
+ * to /login?from=/admin so they can sign in and return.
+ * Only users with the admin email (configured below) can access the panel.
  */
+
+// Restrict access to specific email(s). Configure as needed.
+const ADMIN_EMAILS = ["admin@citywalkrealestatellc.com"]
+
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState("properties") // "properties" | "agents"
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
+
+  // Demo login check for development without Supabase
+  const supabaseConfigured = !!import.meta.env.VITE_SUPABASE_URL
+  const demoLoggedIn = !supabaseConfigured && localStorage.getItem("demo_admin_logged_in") === "true"
+  const authenticated = user || demoLoggedIn
+
+  // Email-based access control for Supabase auth
+  const hasAccess = demoLoggedIn || (user && ADMIN_EMAILS.includes(user.email))
+
+  const [activeTab, setActiveTab] = useState("properties")
   const [properties, setProperties] = useState([])
   const [agents, setAgents] = useState([])
   const [loading, setLoading] = useState(true)
-  const [editingItem, setEditingItem] = useState(null) // { type: 'property'|'agent', data: {...} }
+  const [editingItem, setEditingItem] = useState(null)
   const [isCreating, setIsCreating] = useState(false)
 
+  // Redirect to /login if not authenticated
   useEffect(() => {
+    if (!authenticated || !hasAccess) {
+      navigate("/login", { replace: true, state: { from: "/admin" } })
+    }
+  }, [authenticated, hasAccess, navigate])
+
+  useEffect(() => {
+    if (!authenticated || !hasAccess) return
     loadData()
-  }, [])
+  }, [authenticated, hasAccess])
 
   async function loadData() {
     setLoading(true)
@@ -40,6 +69,15 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false)
     }
+  }
+
+  function handleLogout() {
+    if (user) {
+      signOut()
+    } else if (demoLoggedIn) {
+      localStorage.removeItem("demo_admin_logged_in")
+    }
+    navigate("/login", { replace: true })
   }
 
   function openCreate(type) {
@@ -161,7 +199,7 @@ export default function AdminDashboard() {
     })
   }
 
-  if (loading && !editingItem) {
+  if (!authenticated || !hasAccess || loading) {
     return (
       <div className="min-h-screen bg-white py-24 md:py-40">
         <div className="max-w-[1400px] mx-auto px-[4%] md:px-[2%]">
@@ -185,15 +223,25 @@ export default function AdminDashboard() {
       <div className="max-w-[1400px] mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="font-display text-display-xl font-light">Admin Dashboard</h1>
-          {!editingItem && (
+          <div className="flex items-center gap-3">
+            {!editingItem && (
+              <button
+                onClick={() => openCreate(activeTab === "properties" ? "property" : "agent")}
+                className="flex items-center gap-2 px-4 py-2 bg-forest text-white font-body text-xs tracking-label uppercase hover:bg-forest/90 transition-colors"
+              >
+                <Plus size={16} />
+                Add New {activeTab === "properties" ? "Property" : "Agent"}
+              </button>
+            )}
             <button
-              onClick={() => openCreate(activeTab === "properties" ? "property" : "agent")}
-              className="flex items-center gap-2 px-4 py-2 bg-forest text-white font-body text-xs tracking-label uppercase hover:bg-forest/90 transition-colors"
+              onClick={handleLogout}
+              className="flex items-center gap-2 px-4 py-2 border border-border text-foreground font-body text-xs tracking-label uppercase hover:bg-secondary transition-colors"
+              title="Sign out"
             >
-              <Plus size={16} />
-              Add New {activeTab === "properties" ? "Property" : "Agent"}
+              <LogOut size={16} />
+              Sign Out
             </button>
-          )}
+          </div>
         </div>
 
         {/* Tabs */}
@@ -220,7 +268,7 @@ export default function AdminDashboard() {
           </button>
         </div>
 
-        {/* Editor Modal / Inline */}
+        {/* Editor Modal */}
         {editingItem && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 overflow-y-auto">
             <div className="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
@@ -367,6 +415,10 @@ export default function AdminDashboard() {
                         onChange={handleImageUrlsChange}
                         className="w-full px-4 py-3 border border-border rounded-lg font-body text-sm resize-none"
                       />
+                      <p className="font-body text-xs text-muted-foreground mt-1">
+                        Get image URLs from your image host or CDN. The first URL
+                        becomes the featured image.
+                      </p>
                     </div>
                     <div className="flex items-center gap-2 pt-2">
                       <input
@@ -506,7 +558,8 @@ export default function AdminDashboard() {
                         <div>
                           <h3 className="font-display text-lg">{property.title}</h3>
                           <p className="font-body text-sm text-muted-foreground">
-                            {property.city} · {property.property_type} · {property.price
+                            {property.city} · {property.property_type} ·{" "}
+                            {property.price
                               ? `$${property.price.toLocaleString()}`
                               : "Price on request"}
                           </p>
@@ -557,7 +610,7 @@ export default function AdminDashboard() {
                         <div>
                           <h3 className="font-display text-lg">{agent.name}</h3>
                           <p className="font-body text-sm text-muted-foreground">
-                            {agent.title || agent.email || "No details set"}
+                            {agent.email || agent.phone || "No contact details set"}
                           </p>
                         </div>
                       </div>

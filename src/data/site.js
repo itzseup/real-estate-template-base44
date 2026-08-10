@@ -127,9 +127,8 @@ export const FOOTER_COLUMNS = [
   {
     title: "Admin",
     links: [
+      { label: "Login", href: "/login" },
       { label: "Dashboard", href: "/admin" },
-      { label: "Manage Properties", href: "/admin" },
-      { label: "Manage Agents", href: "/admin" },
     ],
   },
   {

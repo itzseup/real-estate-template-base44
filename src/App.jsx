@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/lib/AuthContext"
 import Layout from "@/components/Layout"
@@ -13,6 +13,7 @@ import OffPlanPage from "@/pages/OffPlan"
 import CommercialPage from "@/pages/Commercial"
 import ContactPage from "@/pages/Contact"
 import InquiryPage from "@/pages/InquiryPage"
+import LoginPage from "@/pages/LoginPage"
 import OurTeamPage from "@/pages/OurTeam"
 import CareersPage from "@/pages/Careers"
 import BlogPage from "@/pages/Blog"
@@ -38,6 +39,7 @@ const ROUTES = [
   { path: "/blog/:id", element: <BlogDetailPage /> },
   { path: "/contact", element: <ContactPage /> },
   { path: "/inquiry-received", element: <InquiryPage /> },
+  { path: "/login", element: <LoginPage /> },
   { path: "/admin", element: <AdminDashboard /> },
   { path: "/terms", element: <TermsPage /> },
   { path: "/accessibility", element: <AccessibilityPage /> },
