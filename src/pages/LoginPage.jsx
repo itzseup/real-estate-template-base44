@@ -15,7 +15,7 @@ import { Lock } from "lucide-react"
  * Supabase Auth user automatically (see note below).
  */
 
-const ADMIN_EMAIL = "rafat@citywalkrealestatellc.com"
+const ADMIN_EMAIL = "example@gmail.com"
 const ADMIN_PASSWORD = "Shahood@123"
 
 export default function LoginPage() {
@@ -105,7 +105,7 @@ export default function LoginPage() {
               className={`w-full px-4 py-3 border rounded-lg font-body text-sm ${
                 error ? "border-destructive" : "border-border"
               }`}
-              placeholder={ADMIN_EMAIL}
+              placeholder="example@gmail.com"
             />
           </div>
           <div>
