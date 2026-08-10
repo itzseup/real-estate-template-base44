@@ -14,6 +14,6 @@ INSERT INTO public.blog_posts (id, title, slug, excerpt, content, author_id, pub
 
 -- Fake testimonials removed — no fabricated reviews with star ratings.
 
-INSERT INTO public.inquiries (id, name, email, phone, message, property_id, status) VALUES
-  ('40000000-0000-0000-0000-000000000001', 'Alex Thompson', 'alex.thompson@email.com', '(555) 222-3333', 'Hi, I''d like to schedule a viewing for the Downtown Penthouse. Are you available this weekend?', '10000000-0000-0000-0000-000000000001', 'new'),
-  ('40000000-0000-0000-0000-000000000002', 'Maria Gonzalez', 'maria.gonzalez@email.com', '(555) 444-5555', 'Is the Waterfront Villa still available? I''m interested in a virtual tour if possible.', '10000000-0000-0000-0000-000000000003', 'new');
+INSERT INTO public.inquiries (id, name, email, phone, message, property_id, agent_assigned, status) VALUES
+  ('40000000-0000-0000-0000-000000000001', 'Alex Thompson', 'alex.thompson@email.com', '(555) 222-3333', 'Hi, I''d like to schedule a viewing for the Downtown Penthouse. Are you available this weekend?', '10000000-0000-0000-0000-000000000001', NULL, 'new'),
+  ('40000000-0000-0000-0000-000000000002', 'Maria Gonzalez', 'maria.gonzalez@email.com', '(555) 444-5555', 'Is the Waterfront Villa still available? I''m interested in a virtual tour if possible.', '10000000-0000-0000-0000-000000000003', NULL, 'new');

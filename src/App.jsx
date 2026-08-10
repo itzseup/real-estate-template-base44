@@ -14,6 +14,8 @@ import CommercialPage from "@/pages/Commercial"
 import ContactPage from "@/pages/Contact"
 import InquiryPage from "@/pages/InquiryPage"
 import LoginPage from "@/pages/LoginPage"
+import AgentLoginPage from "@/pages/AgentLoginPage"
+import AgentDashboardPage from "@/pages/AgentDashboardPage"
 import OurTeamPage from "@/pages/OurTeam"
 import CareersPage from "@/pages/Careers"
 import BlogPage from "@/pages/Blog"
@@ -40,6 +42,8 @@ const ROUTES = [
   { path: "/contact", element: <ContactPage /> },
   { path: "/inquiry-received", element: <InquiryPage /> },
   { path: "/login", element: <LoginPage /> },
+  { path: "/agent-login", element: <AgentLoginPage /> },
+  { path: "/agent-dashboard", element: <AgentDashboardPage /> },
   { path: "/admin", element: <AdminDashboard /> },
   { path: "/terms", element: <TermsPage /> },
   { path: "/accessibility", element: <AccessibilityPage /> },

@@ -1,0 +1,46 @@
+Build a lead assignment and agent dashboard feature for this real estate React/SSR app. The project uses Vite, React Router, Tailwind CSS, lucide-react icons, Supabase (via base44 compatibility layer at src/api/base44Client.js), and has an existing admin dashboard at src/pages/admin/Dashboard.jsx.
+
+The existing data schema (from supabase/migrations/20240809000000_init_schema.sql and supabase/seed.sql):
+- inquiries table: id, name, email, phone, message, property_id (FK to properties), status ('new'|read|replied|archived), created_at, updated_at
+- agents table: id, name, email, phone, bio, avatar_url, properties_count
+- properties table: id, title, description, price, address, city, state, zip_code, country, bedrooms, bathrooms, area_sqft, property_type, status, featured, agent_id, image_urls
+
+TASK: Implement 4 features. Do NOT touch the login credential logic (ADMIN_EMAIL = "rafat@citywalkrealestatellc.com", ADMIN_PASSWORD = "Shahood@123"). The login system at /login and the admin auth flow are already working and must not be broken.
+
+1. Add agent_assigned column to inquiries table:
+   - Edit supabase/migrations/20240809000000_init_schema.sql to add `agent_assigned uuid references public.agents(id) on delete set null` to the inquiries table definition
+   - Add agent_assigned column references to the seed.sql inquiries INSERTs (leave it NULL for existing seed data)
+   - Add a migration file: supabase/migrations/20260810000000_add_agent_assigned.sql with ALTER TABLE
+
+2. Add a Leads Management tab to the existing admin dashboard (src/pages/admin/Dashboard.jsx):
+   - Add a new tab "Leads" alongside "Properties" and "Agents"
+   - In the Leads tab, show a table of all inquiries with columns: Name, Email, Phone, Property (linked), Status, Assigned Agent (dropdown to assign from existing agents), Created date
+   - The Assigned Agent dropdown should show all agents and allow selecting/unassigning
+   - When an agent is assigned, call base44.entities.Inquiry.update(id, { agent_assigned: agentId })
+   - Show the agent's name (not just ID) in the table
+   - Add a "Status" dropdown to update inquiry status (new/read/replied/archived)
+   - Keep the existing tabs and functionality intact
+
+3. Create an Agent Login page at src/pages/AgentLoginPage.jsx at route /agent-login:
+   - Simple form: email + password
+   - Hardcoded credentials for agents (same as admin: email/password matching agent's email)
+   - On success, store the agent's email in localStorage as "agent_session_email"
+   - Redirect to /agent-dashboard
+   - If already logged in as agent, redirect to /agent-dashboard
+
+4. Create an Agent Dashboard page at src/pages/AgentDashboard.jsx at route /agent-dashboard:
+   - Requires agent login (check localStorage "agent_session_email")
+   - If not logged in, redirect to /agent-login
+   - Show a "Sign Out" button that clears localStorage and redirects to /agent-login
+   - Show the agent's name and email at the top
+   - Display a table of inquiries assigned to this agent (filter inquiries by agent_assigned matching the agent's id)
+   - Columns: Customer Name, Customer Email, Customer Phone, Property (title), Status, Message (truncated), Created date
+   - Show inquiry status badges (new/read/replied/archived)
+   - Show total count of assigned leads
+
+5. Wire all routes into src/App.jsx:
+   - Add /agent-login route (no auth layout, standalone like /login)
+   - Add /agent-dashboard route (no auth layout, standalone like /login)
+   - Update ROUTES in src/lib/seo.js to include /agent-login and /agent-dashboard
+
+Style guidance: match existing component patterns. Use lucide-react icons. Use Tailwind classes consistent with the project (font-display for headings, font-body for body text, 'text-forest' for primary color, 'border-border' for borders). The admin Dashboard uses inline styles with Tailwind classes, no external CSS components.

@@ -93,6 +93,7 @@ create table if not exists public.inquiries (
   phone text,
   message text,
   property_id uuid references public.properties(id) on delete set null,
+  agent_assigned uuid references public.agents(id) on delete set null,
   status text default 'new', -- new | read | replied | archived
   created_at timestamp with time zone default now(),
   updated_at timestamp with time zone default now()

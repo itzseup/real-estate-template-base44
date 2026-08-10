@@ -38,6 +38,7 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("properties")
   const [properties, setProperties] = useState([])
   const [agents, setAgents] = useState([])
+  const [inquiries, setInquiries] = useState([])
   const [loading, setLoading] = useState(true)
   const [editingItem, setEditingItem] = useState(null)
   const [isCreating, setIsCreating] = useState(false)
@@ -57,16 +58,29 @@ export default function AdminDashboard() {
   async function loadData() {
     setLoading(true)
     try {
-      const [propertiesData, agentsData] = await Promise.all([
+      const [propertiesData, agentsData, inquiriesData] = await Promise.all([
         base44.entities.Property.list("-created_date", 100),
         base44.entities.Agent.list("-created_date", 50),
+        base44.entities.Inquiry.list("-created_date", 100),
       ])
       setProperties(propertiesData || [])
       setAgents(agentsData || [])
+      setInquiries(inquiriesData || [])
     } catch (error) {
       console.error("Error loading data:", error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  // Update inquiry status and agent assignment
+  async function handleInquiryUpdate(id, field, value) {
+    try {
+      await base44.entities.Inquiry.update(id, { [field]: value })
+      await loadData()
+    } catch (error) {
+      console.error("Error updating inquiry:", error)
+      alert("Failed to update inquiry.")
     }
   }
 
@@ -264,6 +278,16 @@ export default function AdminDashboard() {
             }`}
           >
             Agents ({agents.length})
+          </button>
+          <button
+            onClick={() => setActiveTab("leads")}
+            className={`font-body text-xs tracking-label uppercase pb-3 px-1 transition-colors ${
+              activeTab === "leads"
+                ? "text-forest border-b-2 border-forest"
+                : "text-muted-foreground hover:text-forest"
+            }`}
+          >
+            Leads ({inquiries.length})
           </button>
         </div>
 
@@ -632,11 +656,109 @@ export default function AdminDashboard() {
                     </div>
                   ))
                 )}
-              </div>
+                </div>
+              )}
+
+              {activeTab === "leads" && (
+                <div className="overflow-x-auto">
+                {inquiries.length === 0 ? (
+                  <p className="font-body text-muted-foreground py-8 text-center">
+                    No inquiries yet. Inquiries appear here when visitors submit the
+                    contact form.
+                  </p>
+                ) : (
+                  <table className="w-full border-collapse text-sm">
+                    <thead>
+                      <tr className="border-b border-border">
+                        <th className="text-left font-body text-xs tracking-label uppercase text-muted-foreground py-3 px-4">
+                          Customer
+                        </th>
+                        <th className="text-left font-body text-xs tracking-label uppercase text-muted-foreground py-3 px-4">
+                          Contact
+                        </th>
+                        <th className="text-left font-body text-xs tracking-label uppercase text-muted-foreground py-3 px-4">
+                          Status
+                        </th>
+                        <th className="text-left font-body text-xs tracking-label uppercase text-muted-foreground py-3 px-4">
+                          Assign to Agent
+                        </th>
+                        <th className="text-left font-body text-xs tracking-label uppercase text-muted-foreground py-3 px-4">
+                          Date
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {inquiries.map((inquiry) => (
+                        <tr key={inquiry.id} className="border-b border-border">
+                          <td className="py-3 px-4">
+                            <p className="font-body font-medium text-foreground">
+                              {inquiry.name}
+                            </p>
+                            {inquiry.message && (
+                              <p className="font-body text-xs text-muted-foreground mt-1 line-clamp-2">
+                                {inquiry.message}
+                              </p>
+                            )}
+                          </td>
+                          <td className="py-3 px-4">
+                            <div className="flex flex-col gap-0.5 font-body text-sm text-foreground">
+                              {inquiry.email}
+                              {inquiry.phone && <span>{inquiry.phone}</span>}
+                            </div>
+                          </td>
+                          <td className="py-3 px-4">
+                            <select
+                              value={inquiry.status || "new"}
+                              onChange={(e) =>
+                                handleInquiryUpdate(
+                                  inquiry.id,
+                                  "status",
+                                  e.target.value
+                                )
+                              }
+                              className="font-body text-xs border border-border rounded px-2 py-1"
+                            >
+                              <option value="new">New</option>
+                              <option value="read">Read</option>
+                              <option value="replied">Replied</option>
+                              <option value="archived">Archived</option>
+                            </select>
+                          </td>
+                          <td className="py-3 px-4">
+                            <select
+                              value={inquiry.agent_assigned || ""}
+                              onChange={(e) =>
+                                handleInquiryUpdate(
+                                  inquiry.id,
+                                  "agent_assigned",
+                                  e.target.value || null
+                                )
+                              }
+                              className="font-body text-xs border border-border rounded px-2 py-1"
+                            >
+                              <option value="">Unassigned</option>
+                              {agents.map((agent) => (
+                                <option key={agent.id} value={agent.id}>
+                                  {agent.name}
+                                </option>
+                              ))}
+                            </select>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="font-body text-xs text-muted-foreground">
+                              {new Date(inquiry.created_at).toLocaleDateString()}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+                </div>
+              )}
+              </>
             )}
-          </>
-        )}
-      </div>
-    </div>
-  )
-}
+          </div>
+        </div>
+    )
+  }

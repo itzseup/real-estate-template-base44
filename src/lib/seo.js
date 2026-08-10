@@ -36,6 +36,8 @@ export const ROUTES = [
   "/contact",
   "/inquiry-received",
   "/login",
+  "/agent-login",
+  "/agent-dashboard",
   "/terms",
   "/accessibility",
 ]
