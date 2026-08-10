@@ -22,7 +22,7 @@ import { Plus, Edit2, Trash2, Save, X, LogOut } from "lucide-react"
  */
 
 // Restrict access to specific email(s). Configure as needed.
-const ADMIN_EMAILS = ["admin@citywalkrealestatellc.com"]
+const ADMIN_EMAILS = ["rafat@citywalkrealestatellc.com"]
 
 export default function AdminDashboard() {
   const { user, signOut } = useAuth()

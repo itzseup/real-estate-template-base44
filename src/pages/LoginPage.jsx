@@ -8,11 +8,18 @@ import { Lock } from "lucide-react"
  * LoginPage — standalone login at /login.
  *
  * After a successful login, the user is redirected to /admin (or wherever
- * they were trying to go). If Supabase is not configured, a demo login
- * screen is shown so the admin panel is usable in development.
+ * they were trying to go).
+ *
+ * Credentials are hardcoded: rafat@citywalkrealestatellc.com / Shahood@123
+ * When Supabase is configured, these credentials are also created as a
+ * Supabase Auth user automatically (see note below).
  */
+
+const ADMIN_EMAIL = "rafat@citywalkrealestatellc.com"
+const ADMIN_PASSWORD = "Shahood@123"
+
 export default function LoginPage() {
-  const { signIn } = useAuth()
+  const { user, signIn } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const [email, setEmail] = useState("")
@@ -23,36 +30,46 @@ export default function LoginPage() {
   // Where to send the user after login — default to /admin
   const from = location.state?.from || "/admin"
 
-  const supabaseConfigured = !!import.meta.env.VITE_SUPABASE_URL
-
-  // Demo login for development without Supabase
-  const [demoMode] = useState(!supabaseConfigured)
+  // If already logged in (Supabase), redirect to the destination
+  if (user) {
+    navigate(from, { replace: true })
+    return null
+  }
 
   async function handleSubmit(e) {
     e.preventDefault()
     if (!email || !password) return
 
-    if (demoMode) {
-      // Simple demo auth — store flag in localStorage and navigate
+    // Hardcoded credential check — works without Supabase
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      // Store demo session in localStorage for Dashboard component
       localStorage.setItem("demo_admin_logged_in", "true")
+      localStorage.setItem("demo_admin_email", email)
       navigate(from, { replace: true })
       return
     }
 
-    setSubmitting(true)
-    setError("")
-    try {
-      const { error: signInError } = await signIn(email, password)
-      if (signInError) {
-        setError(signInError.message || "Invalid email or password.")
-      } else {
-        navigate(from, { replace: true })
+    // If Supabase is configured, try real auth as a fallback
+    const supabaseConfigured = !!import.meta.env.VITE_SUPABASE_URL
+    if (supabaseConfigured) {
+      setSubmitting(true)
+      setError("")
+      try {
+        const { error: signInError } = await signIn(email, password)
+        if (signInError) {
+          setError(signInError.message || "Invalid email or password.")
+        } else {
+          navigate(from, { replace: true })
+        }
+      } catch {
+        setError("Something went wrong. Please try again.")
+      } finally {
+        setSubmitting(false)
       }
-    } catch {
-      setError("Something went wrong. Please try again.")
-    } finally {
-      setSubmitting(false)
+      return
     }
+
+    setError("Invalid email or password.")
   }
 
   return (
@@ -88,7 +105,7 @@ export default function LoginPage() {
               className={`w-full px-4 py-3 border rounded-lg font-body text-sm ${
                 error ? "border-destructive" : "border-border"
               }`}
-              placeholder="admin@example.com"
+              placeholder={ADMIN_EMAIL}
             />
           </div>
           <div>
@@ -118,12 +135,6 @@ export default function LoginPage() {
             {submitting ? "Signing in..." : "Sign In"}
           </button>
         </form>
-
-        {demoMode && (
-          <p className="mt-4 font-body text-xs text-muted-foreground text-center">
-            Demo mode — any email and password works.
-          </p>
-        )}
       </div>
     </div>
   )
