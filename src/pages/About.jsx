@@ -51,18 +51,18 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16 mb-24">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 md:gap-16 mb-24">
           <div className="text-center">
             <div className="text-4xl font-display font-light mb-2">20+</div>
             <p className="font-body text-sm text-muted-foreground">Years Experience</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-display font-light mb-2">$2B+</div>
-            <p className="font-body text-sm text-muted-foreground">Annual Sales Volume</p>
+            <div className="text-4xl font-display font-light mb-2">Licensed</div>
+            <p className="font-body text-sm text-muted-foreground">Dubai &amp; Ajman</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-display font-light mb-2">50+</div>
-            <p className="font-body text-sm text-muted-foreground">Industry Awards</p>
+            <div className="text-4xl font-display font-light mb-2">24h</div>
+            <p className="font-body text-sm text-muted-foreground">Response Guarantee</p>
           </div>
         </div>
       </section>

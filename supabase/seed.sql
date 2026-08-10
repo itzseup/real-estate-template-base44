@@ -12,9 +12,7 @@ INSERT INTO public.blog_posts (id, title, slug, excerpt, content, author_id, pub
   ('20000000-0000-0000-0000-000000000001', 'Top 10 Real Estate Markets to Watch in 2024', 'top-10-real-estate-markets-2024', 'Discover the emerging markets that smart investors are eyeing this year, from tech hubs to sunbelt cities.', '## Market Trends\n\nThe real estate landscape is shifting. Here are the top 10 markets...', '00000000-0000-0000-0000-000000000001', true, '2024-01-15T10:00:00Z', 'https://images.unsplash.com/photo-1560518868-7e8e2b3d5d33'),
   ('20000000-0000-0000-0000-000000000002', 'How to Negotiate Your First Home Purchase', 'negotiate-first-home-purchase', 'A practical guide to navigating the often-intimidating home buying process.', '## Negotiation Tips\n\n1. Get pre-approved\n2. Work with an agent\n3. Understand market conditions...', '00000000-0000-0000-0000-000000000002', true, '2024-02-20T14:00:00Z', 'https://images.unsplash.com/photo-1562121910-647f4d0e2a2e');
 
-INSERT INTO public.testimonials (id, client_name, client_avatar, content, rating, property_id) VALUES
-  ('30000000-0000-0000-0000-000000000001', 'Jennifer & Mark Davis', 'https://images.unsplash.com/photo-1539571696522-5f0b7f0a8b6f', 'Sarah helped us find our dream home in just 3 weeks. Her expertise and patience made the entire process seamless. Highly recommended!', 5, '10000000-0000-0000-0000-000000000001'),
-  ('30000000-0000-0000-0000-000000000002', 'Robert Chen', 'https://images.unsplash.com/photo-1507003211169-0a1dd729f69a', 'Michael''s insights on investment properties were invaluable. We closed on our rental property under asking price. Will work with again!', 5, '10000000-0000-0000-0000-000000000002');
+-- Fake testimonials removed — no fabricated reviews with star ratings.
 
 INSERT INTO public.inquiries (id, name, email, phone, message, property_id, status) VALUES
   ('40000000-0000-0000-0000-000000000001', 'Alex Thompson', 'alex.thompson@email.com', '(555) 222-3333', 'Hi, I''d like to schedule a viewing for the Downtown Penthouse. Are you available this weekend?', '10000000-0000-0000-0000-000000000001', 'new'),

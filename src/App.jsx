@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/lib/AuthContext"
 import Layout from "@/components/Layout"
@@ -12,12 +12,15 @@ import RentPage from "@/pages/Rent"
 import OffPlanPage from "@/pages/OffPlan"
 import CommercialPage from "@/pages/Commercial"
 import ContactPage from "@/pages/Contact"
+import InquiryPage from "@/pages/InquiryPage"
 import OurTeamPage from "@/pages/OurTeam"
 import CareersPage from "@/pages/Careers"
 import BlogPage from "@/pages/Blog"
 import BlogDetailPage from "@/pages/BlogDetail"
 import SellPage from "@/pages/Sell"
 import TermsPage from "@/pages/Terms"
+import AdminDashboard from "@/pages/admin/Dashboard"
+import PageNotFound from "@/lib/PageNotFound"
 
 const ROUTES = [
   { path: "/", element: <HomePage />, transparent: true },
@@ -34,6 +37,8 @@ const ROUTES = [
   { path: "/blog", element: <BlogPage /> },
   { path: "/blog/:id", element: <BlogDetailPage /> },
   { path: "/contact", element: <ContactPage /> },
+  { path: "/inquiry-received", element: <InquiryPage /> },
+  { path: "/admin", element: <AdminDashboard /> },
   { path: "/terms", element: <TermsPage /> },
   { path: "/accessibility", element: <AccessibilityPage /> },
 ]
@@ -50,6 +55,8 @@ function App() {
               element={<Layout transparent={route.transparent}>{route.element}</Layout>}
             />
           ))}
+          {/* Catch-all 404 route — must come last */}
+          <Route path="*" element={<Layout><PageNotFound /></Layout>} />
         </Routes>
       </AuthProvider>
       <Toaster />

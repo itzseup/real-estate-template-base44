@@ -66,11 +66,12 @@ export const NEWS_ITEM = {
   href: "/blog",
 }
 
+/** Honest, verifiable trust signals. No fake review counts or transaction totals. */
 export const TRUST_STATS = [
-  { value: "4.9", label: "Google Rating", detail: "From 1,900 Reviews", isRating: true },
-  { value: "6,400+", label: "Property Transactions", detail: "2025 to date" },
   { value: "7", label: "Days a week", detail: "We work round the clock" },
-  { value: "250+", label: "Advisors", detail: "Across UAE communities" },
+  { value: "Licensed", label: "Dubai & Ajman", detail: "Real Estate License" },
+  { value: "Same-day", label: "Response Time", detail: "Guaranteed within 24 hours" },
+  { value: "UAE", label: "Local Expertise", detail: "Since 2004" },
 ]
 
 /** Horizontal rail on the dark "Explore Communities in UAE" section. */
@@ -121,6 +122,14 @@ export const FOOTER_COLUMNS = [
       { label: "Market Reports", href: "/blog" },
       { label: "Property Videos", href: "/blog" },
       { label: "Podcasts", href: "/blog" },
+    ],
+  },
+  {
+    title: "Admin",
+    links: [
+      { label: "Dashboard", href: "/admin" },
+      { label: "Manage Properties", href: "/admin" },
+      { label: "Manage Agents", href: "/admin" },
     ],
   },
   {
