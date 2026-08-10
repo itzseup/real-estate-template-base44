@@ -30,7 +30,7 @@ export default function AdminDashboard() {
 
   // Demo login check for development without Supabase
   const supabaseConfigured = !!import.meta.env.VITE_SUPABASE_URL
-  const demoLoggedIn = !supabaseConfigured && localStorage.getItem("demo_admin_logged_in") === "true"
+  const demoLoggedIn = localStorage.getItem("demo_admin_logged_in") === "true"
   const authenticated = user || demoLoggedIn
 
   // Email-based access control for Supabase auth
