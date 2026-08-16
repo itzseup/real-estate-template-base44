@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function AdvisorCard({ agent, index }) {
+  // Build the booking URL with this agent pre-selected
+  const bookingUrl = `/book-appointment?agent=${encodeURIComponent(agent.id)}`
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -39,6 +43,14 @@ export default function AdvisorCard({ agent, index }) {
         {agent.email && <p>{agent.email}</p>}
         {agent.phone && <p>{agent.phone}</p>}
       </div>
+
+      {/* Book appointment button */}
+      <Link
+        to={bookingUrl}
+        className="mt-6 inline-flex items-center justify-center w-full py-3 bg-foreground text-background font-body text-xs tracking-label uppercase hover:bg-foreground/90 transition-colors"
+      >
+        Book Appointment
+      </Link>
     </motion.div>
   );
 }

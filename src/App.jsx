@@ -16,6 +16,8 @@ import InquiryPage from "@/pages/InquiryPage"
 import LoginPage from "@/pages/LoginPage"
 import AgentLoginPage from "@/pages/AgentLoginPage"
 import AgentDashboardPage from "@/pages/AgentDashboardPage"
+import AppointmentsPage from "@/pages/Appointments"
+import AppointmentConfirmedPage from "@/pages/AppointmentConfirmed"
 import OurTeamPage from "@/pages/OurTeam"
 import CareersPage from "@/pages/Careers"
 import BlogPage from "@/pages/Blog"
@@ -35,6 +37,8 @@ const ROUTES = [
   { path: "/about", element: <AboutPage /> },
   { path: "/meet-the-team", element: <OurTeamPage /> },
   { path: "/our-team", element: <OurTeamPage /> },
+  { path: "/book-appointment", element: <AppointmentsPage /> },
+  { path: "/appointment-confirmed", element: <AppointmentConfirmedPage /> },
   { path: "/careers", element: <CareersPage /> },
   { path: "/blog", element: <BlogPage /> },
   { path: "/blog/:id", element: <BlogDetailPage /> },
