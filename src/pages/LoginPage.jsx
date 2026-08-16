@@ -7,7 +7,7 @@ import { Lock } from "lucide-react"
 /**
  * LoginPage — standalone login at /login.
  *
- * After a successful login, the user is redirected to /admin (or wherever
+ * After a successful login, the user is redirected to / (or wherever
  * they were trying to go). If Supabase is not configured, a demo login
  * is used with hardcoded credentials.
  */
@@ -25,8 +25,8 @@ export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false)
   const [demoLoggedIn, setDemoLoggedIn] = useState(false)
 
-  // Where to send the user after login — default to /admin
-  const from = location.state?.from || "/admin"
+  // Where to send the user after login — default to home
+  const from = location.state?.from || "/"
 
   // Redirect after successful demo login
   useEffect(() => {

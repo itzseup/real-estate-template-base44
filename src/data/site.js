@@ -125,13 +125,6 @@ export const FOOTER_COLUMNS = [
     ],
   },
   {
-    title: "Admin",
-    links: [
-      { label: "Login", href: "/login" },
-      { label: "Dashboard", href: "/admin" },
-    ],
-  },
-  {
     title: "About Us",
     links: [
       { label: "About", href: "/about" },

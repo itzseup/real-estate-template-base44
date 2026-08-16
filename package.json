@@ -21,6 +21,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
+    "convex": "^1.44.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^11.2.7",
     "lucide-react": "^0.378.0",

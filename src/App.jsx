@@ -22,7 +22,6 @@ import BlogPage from "@/pages/Blog"
 import BlogDetailPage from "@/pages/BlogDetail"
 import SellPage from "@/pages/Sell"
 import TermsPage from "@/pages/Terms"
-import AdminDashboard from "@/pages/admin/Dashboard"
 import PageNotFound from "@/lib/PageNotFound"
 
 const ROUTES = [
@@ -44,7 +43,6 @@ const ROUTES = [
   { path: "/login", element: <LoginPage /> },
   { path: "/agent-login", element: <AgentLoginPage /> },
   { path: "/agent-dashboard", element: <AgentDashboardPage /> },
-  { path: "/admin", element: <AdminDashboard /> },
   { path: "/terms", element: <TermsPage /> },
   { path: "/accessibility", element: <AccessibilityPage /> },
 ]
